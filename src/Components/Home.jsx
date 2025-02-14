@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import OperationTable from "./OperationTable";
+import config from "../config";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -37,12 +38,12 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/")
+      .get(`${config.API_BASE_URL}/`)
       .then((response) => setOperations(response.data))
       .catch((error) => console.error("Error fetching operations:", error));
 
     axios
-      .get("http://localhost:8080/allowance")
+      .get(`${config.API_BASE_URL}/allowance`)
       .then((response) => {
         setAllowance(response.data);
         setSubmittedAllowance(response.data);
@@ -70,7 +71,7 @@ export default function Home() {
     try {
       const updatedAllowance = parseInt(newAllowance, 10);
       const response = await axios.put(
-        `http://localhost:8080/update-table/${updatedAllowance}`
+        `${config.API_BASE_URL}/update-table/${updatedAllowance}`
       );
 
       setOperations(response.data);
@@ -84,7 +85,7 @@ export default function Home() {
 
   const handleExportToExcel = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/export-excel", {
+      const response = await axios.get(`${config.API_BASE_URL}/export-excel`, {
         responseType: "blob",
       });
 
@@ -117,7 +118,7 @@ export default function Home() {
   const handleLapCountConfirm = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/export-and-clear",
+        `${config.API_BASE_URL}/export-and-clear`,
         {
           responseType: "blob",
         }
@@ -140,7 +141,7 @@ export default function Home() {
 
   const handleDelete = async (operatorId) => {
     try {
-      await axios.delete(`http://localhost:8080/delete/${operatorId}`);
+      await axios.delete(`${config.API_BASE_URL}/delete/${operatorId}`);
 
       setOperations((prevOperations) =>
         prevOperations.filter(

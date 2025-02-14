@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { TextField, Button, Box, Stack } from "@mui/material";
+import config from "../config";
 
 export default function OperationDetails() {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function OperationDetails() {
     // Function to check if operator ID exists in the database
     const checkIfOperatorExists = async (operatorId) => {
         try {
-            const response = await fetch(`http://localhost:8080/exists/${operatorId}`);
+            const response = await fetch(`${config.API_BASE_URL}/exists/${operatorId}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

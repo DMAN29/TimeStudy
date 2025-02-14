@@ -13,6 +13,7 @@ import {
   Paper,
   Button,
 } from "@mui/material";
+import config from "../../config";
 
 function StopWatch() {
   const navigate = useNavigate();
@@ -85,7 +86,7 @@ function StopWatch() {
 
     try {
 		console.log(payload);
-      const response = await fetch("http://localhost:8080/submit", {
+      const response = await fetch(`${config.API_BASE_URL}/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
