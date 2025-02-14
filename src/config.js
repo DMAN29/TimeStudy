@@ -1,5 +1,5 @@
 const config = {
-    API_BASE_URL: "https://test.surgot.in/", // Change this URL when needed
+    API_BASE_URL: "http://localhost:5000", // Change this URL when needed
   };
   
   export default config;
