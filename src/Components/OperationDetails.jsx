@@ -26,7 +26,7 @@ export default function OperationDetails() {
     // Function to check if operator ID exists in the database
     const checkIfOperatorExists = async (operatorId) => {
         try {
-            const response = await fetch(`http://116.203.204.42:5000/exists/${operatorId}`);
+            const response = await fetch(`${config.API_BASE_URL}/exists/${operatorId}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

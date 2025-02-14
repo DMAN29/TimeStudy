@@ -38,12 +38,12 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get(`http://116.203.204.42:5000/`)
+      .get(`${config.API_BASE_URL}/`)
       .then((response) => setOperations(response.data))
       .catch((error) => console.error("Error fetching operations:", error));
 
     axios
-      .get(`http://116.203.204.42:5000/allowance`)
+      .get(`${config.API_BASE_URL}/allowance`)
       .then((response) => {
         setAllowance(response.data);
         setSubmittedAllowance(response.data);
@@ -71,7 +71,7 @@ export default function Home() {
     try {
       const updatedAllowance = parseInt(newAllowance, 10);
       const response = await axios.put(
-        `http://116.203.204.42:5000/update-table/${updatedAllowance}`
+        `${config.API_BASE_URL}/update-table/${updatedAllowance}`
       );
 
       setOperations(response.data);
@@ -85,7 +85,7 @@ export default function Home() {
 
   const handleExportToExcel = async () => {
     try {
-      const response = await axios.get(`http://116.203.204.42:5000/export-excel`, {
+      const response = await axios.get(`${config.API_BASE_URL}/export-excel`, {
         responseType: "blob",
       });
 
@@ -118,7 +118,7 @@ export default function Home() {
   const handleLapCountConfirm = async () => {
     try {
       const response = await axios.get(
-        `http://116.203.204.42:5000/export-and-clear`,
+        `${config.API_BASE_URL}/export-and-clear`,
         {
           responseType: "blob",
         }
@@ -141,7 +141,7 @@ export default function Home() {
 
   const handleDelete = async (operatorId) => {
     try {
-      await axios.delete(`http://116.203.204.42:5000/delete/${operatorId}`);
+      await axios.delete(`${config.API_BASE_URL}/delete/${operatorId}`);
 
       setOperations((prevOperations) =>
         prevOperations.filter(
