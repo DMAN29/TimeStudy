@@ -86,7 +86,7 @@ function StopWatch() {
 
     try {
 		console.log(payload);
-      const response = await fetch(`${config.API_BASE_URL}/submit`, {
+      const response = await fetch(`http://116.203.204.42:5000/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
